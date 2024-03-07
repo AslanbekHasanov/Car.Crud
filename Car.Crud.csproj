@@ -8,7 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Broker\NewFolder\" />
+    <Compile Remove="Broker\NewFolder\**" />
+    <EmbeddedResource Remove="Broker\NewFolder\**" />
+    <None Remove="Broker\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTO\" />
   </ItemGroup>
 
 </Project>

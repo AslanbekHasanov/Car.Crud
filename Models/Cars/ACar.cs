@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Car.Crud.Models.Cars
 {
-    public class Car
+    public class ACar
     {
         public int Id { get; set; }
         public string Name { get; set; }
