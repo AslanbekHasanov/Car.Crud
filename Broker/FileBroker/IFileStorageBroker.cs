@@ -11,6 +11,7 @@ namespace Car.Crud.Broker.FileStorageBroker
     {
         //read-all
         List<ACar> ReadALlCars();
+        ACar ReadCar(int id);
         ACar AddCar(ACar car);
         bool DeleteACar(string number);
     }

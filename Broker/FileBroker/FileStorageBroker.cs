@@ -76,6 +76,29 @@ namespace Car.Crud.Broker.FileBroker
             return cars;
         }
 
+        public ACar ReadCar(int id)
+        {
+            string[] carInformation = File.ReadAllLines(FilePath);
+            for (int i = 0; i < carInformation.Length; i++)
+            {
+                string carLine = carInformation[i];
+                string[] car = carLine.Split("-");
+                if (Convert.ToInt32(car[0]) == id)
+                {
+                    ACar aCar = new ACar() 
+                    {
+                        Id = Convert.ToInt32(car[0]),
+                        Name = car[1],
+                        Color = car[2],
+                        Number = car[3]
+                    };
+                    return aCar;
+                }
+            }
+
+            return new ACar();
+        }
+
         private void IsFileExists()
         {
             bool isThere = File.Exists(FilePath);
