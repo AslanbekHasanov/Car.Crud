@@ -9,10 +9,11 @@ using Car.Crud.Models.Cars;
 
 IFileStorageBroker storageBroker = new FileStorageBroker();
 
-List<ACar> cars = storageBroker.ReadALlCars();
-
-foreach(var car in cars )
+if(storageBroker.DeleteACar("70AA211DA"))
 {
-    Console.WriteLine($"{car.Id}. {car.Name} - {car.Color} - {car.Number}");
-
+    Console.WriteLine("Deleted");
+}
+else
+{
+    Console.WriteLine("Not Found");
 }
