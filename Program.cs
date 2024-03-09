@@ -9,11 +9,15 @@ using Car.Crud.Models.Cars;
 
 IFileStorageBroker storageBroker = new FileStorageBroker();
 
-if(storageBroker.DeleteACar("70AA211DA"))
+ACar result = storageBroker.ReadCar(1);
+if (result.Id != 0)
 {
-    Console.WriteLine("Deleted");
+    Console.WriteLine("Id: " + result.Id);
+    Console.WriteLine("Name: " + result.Name);
+    Console.WriteLine("Color: " + result.Color);
+    Console.WriteLine("Number: " + result.Number);
 }
 else
 {
-    Console.WriteLine("Not Found");
+    Console.WriteLine("Not Found!");
 }
