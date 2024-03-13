@@ -1,23 +1,24 @@
-﻿// ---------------------------------------------------------------
-// Copyright (c) Coalition of the Good-Hearted Engineers
+﻿//---------------------------------------------------------------
+//Copyright(c) Coalition of the Good-Hearted Engineers
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
+
+
 
 using Car.Crud.Broker.FileBroker;
 using Car.Crud.Broker.FileStorageBroker;
 using Car.Crud.Models.Cars;
+using Car.Crud.Service.CarService;
 
-IFileStorageBroker storageBroker = new FileStorageBroker();
+ICarService carService = new CarService();
 
-ACar result = storageBroker.ReadCar(1);
-if (result.Id != 0)
+
+ACar car = new ACar()
 {
-    Console.WriteLine("Id: " + result.Id);
-    Console.WriteLine("Name: " + result.Name);
-    Console.WriteLine("Color: " + result.Color);
-    Console.WriteLine("Number: " + result.Number);
-}
-else
-{
-    Console.WriteLine("Not Found!");
-}
+   Id = 5,
+   Name = "Honda",
+   Color = "White",
+   Number = "01AA101AA"
+};
+var res = carService.AddCar(null);
+

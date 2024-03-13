@@ -47,7 +47,7 @@ namespace Car.Crud.Broker.FileBroker
                 {
                     if (carInfo[i] is not null)
                     {
-                        File.AppendAllText(FilePath,$"{carInfo[i]}\n");  
+                        File.AppendAllText(FilePath, $"{carInfo[i]}\n");
                     }
                 }
                 return true;
@@ -59,12 +59,12 @@ namespace Car.Crud.Broker.FileBroker
             List<ACar> cars = new List<ACar>();
             string[] information = File.ReadAllLines(FilePath);
 
-            for(int i = 0; i < information.Length; i++)
+            for (int i = 0; i < information.Length; i++)
             {
                 string carLine = information[i];
                 string[] carInformationLine = carLine.Split('-');
 
-                ACar car = new ACar()   
+                ACar car = new ACar()
                 {
                     Id = Convert.ToInt32(carInformationLine[0]),
                     Name = carInformationLine[1],
@@ -85,7 +85,7 @@ namespace Car.Crud.Broker.FileBroker
                 string[] car = carLine.Split("-");
                 if (Convert.ToInt32(car[0]) == id)
                 {
-                    ACar aCar = new ACar() 
+                    ACar aCar = new ACar()
                     {
                         Id = Convert.ToInt32(car[0]),
                         Name = car[1],
@@ -99,10 +99,41 @@ namespace Car.Crud.Broker.FileBroker
             return new ACar();
         }
 
+        public bool Update(ACar car)
+        {
+            bool isThere = false;
+            string[] carInformation = File.ReadAllLines(FilePath);
+            for (int i = 0; i < carInformation.Length; i++)
+            {
+                string carLine = carInformation[i];
+                string[] carInfoLine = carLine.Split("-");
+                if (Convert.ToInt32(carInfoLine[0]) == car.Id)
+                {
+                    carLine = $"{car.Id}-{car.Name}-{car.Color}-{car.Number}";
+                    carInformation[i] = carLine;
+                    isThere = true;
+                    break;
+                }
+            }
+
+            if (isThere is true)
+            {
+                File.Delete(FilePath);
+                File.Create(FilePath).Close();
+                for (int i = 0; i < carInformation.Length; i++)
+                {
+                    File.AppendAllText(FilePath, $"{carInformation[i]}\n");
+                }
+                return true;
+            }
+            return false;
+
+        }
+
         private void IsFileExists()
         {
             bool isThere = File.Exists(FilePath);
-            if (isThere is false) 
+            if (isThere is false)
             {
                 File.Create(FilePath).Close();
             }

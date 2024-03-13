@@ -10,6 +10,9 @@ namespace Car.Crud
 {
     public class LoggingBroker : ILoggingBroker
     {
+        public void LogErorr(string message) =>
+            Console.WriteLine(message);
+
         public void LogError(Exception exception) =>
             Console.WriteLine(exception);
 
