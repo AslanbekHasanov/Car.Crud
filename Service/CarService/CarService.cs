@@ -22,11 +22,32 @@ namespace Car.Crud.Service.CarService
             this.storageBroker = new FileStorageBroker();
             this.loggingBroker = new LoggingBroker();
         }
+
         public ACar AddCar(ACar car)
         {
             return car is null
                 ? AddCarIsNullOrEmpty()
                 : ValidationAddCar(car);
+        }
+
+        public bool DeleteACar(string number)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ACar> ReadALlCars()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ACar ReadCar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(ACar car)
+        {
+            throw new NotImplementedException();
         }
 
         private ACar ValidationAddCar(ACar car)
@@ -52,26 +73,6 @@ namespace Car.Crud.Service.CarService
         {
             this.loggingBroker.LogErorr("Car data is null");
             return new ACar();
-        }
-
-        public bool DeleteACar(string number)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<ACar> ReadALlCars()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ACar ReadCar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(ACar car)
-        {
-            throw new NotImplementedException();
         }
     }
 }

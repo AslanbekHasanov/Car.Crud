@@ -3,6 +3,8 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System;
+
 namespace Car.Crud.Broker.LoggingBroker
 {
     internal interface ILoggingBroker
