@@ -39,14 +39,26 @@ namespace Car.Crud.Service.CarService
 
         public List<ACar> ReadALlCars()
         {
-            throw new NotImplementedException();
+            List<ACar> cars = this.storageBroker.ReadALlCars();
+
+            foreach (ACar car in cars)
+            {
+                this.loggingBroker.LogInformation($"{car.Id}. {car.Name} {car.Color} {car.Color}");
+            }
+
+            this.loggingBroker.LogInformation($"=== End of contacts ===");
+
+            return cars;
         }
 
         public ACar ReadCar(int id)
         {
-            throw new NotImplementedException();
+            return id is 0
+                ? ReadCarIsNullorEmpty()
+                : ValidationReadCar(id);
         }
 
+       
         public bool Update(ACar car)
         {
             throw new NotImplementedException();
@@ -102,6 +114,35 @@ namespace Car.Crud.Service.CarService
         {
             this.loggingBroker.LogErorr("Car data is null");
             return new ACar();
+        }
+        private ACar ReadCarIsNullorEmpty()
+        {
+            this.loggingBroker.LogErorr("Id is null or empty");
+            return new ACar();
+        }
+
+        private ACar ValidationReadCar(int id)
+        {
+            if (String.IsNullOrWhiteSpace(id.ToString()) is true)
+            {
+                this.loggingBroker.LogErorr("Id invalid");
+
+                return new ACar();
+            }
+            else 
+            {
+                ACar result = this.storageBroker.ReadCar(id);
+                if (result is not null)
+                {
+                    this.loggingBroker.LogInformation("Sucesefull");
+                }
+                else
+                {
+                    this.loggingBroker.LogErorr("Not found.");
+                }
+                return result;
+            }
+
         }
     }
 }
