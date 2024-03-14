@@ -32,7 +32,9 @@ namespace Car.Crud.Service.CarService
 
         public bool DeleteACar(string number)
         {
-            throw new NotImplementedException();
+            return number is null
+                ? DeleteCarIsNullorEmpty()
+                : ValidationDeleteCar(number);
         }
 
         public List<ACar> ReadALlCars()
@@ -53,9 +55,9 @@ namespace Car.Crud.Service.CarService
         private ACar ValidationAddCar(ACar car)
         {
             if (string.IsNullOrWhiteSpace(car.Id.ToString())
-                && string.IsNullOrWhiteSpace(car.Name)
-                && string.IsNullOrWhiteSpace(car.Color)
-                && string.IsNullOrWhiteSpace(car.Number)
+                || string.IsNullOrWhiteSpace(car.Name)
+                || string.IsNullOrWhiteSpace(car.Color)
+                || string.IsNullOrWhiteSpace(car.Number)
                 ) 
             {
                 this.storageBroker.AddCar(car);
@@ -67,6 +69,33 @@ namespace Car.Crud.Service.CarService
                 this.loggingBroker.LogInformation("No car information available!");
                 return new ACar();
             }
+        }
+        private bool ValidationDeleteCar(string number)
+        {
+            if (String.IsNullOrWhiteSpace(number) is true)
+            {
+                this.loggingBroker.LogErorr("Number invalid.");
+                return false;
+            }
+            else
+            {
+                bool result = this.storageBroker.DeleteACar(number);
+                if (result is true)
+                {
+                    this.loggingBroker.LogInformation("Delete a car.");
+                }
+                else
+                {
+                    this.loggingBroker.LogErorr("Not Found.");
+                }
+                return result;
+            }
+        }
+
+        private bool DeleteCarIsNullorEmpty()
+        {
+            this.loggingBroker.LogErorr("Number is null or empty.");
+            return false;
         }
 
         private ACar AddCarIsNullOrEmpty()
