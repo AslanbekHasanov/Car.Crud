@@ -13,12 +13,12 @@ using Car.Crud.Service.CarService;
 ICarService carService = new CarService();
 
 
-ACar car = new ACar()
-{
-   Id = 5,
-   Name = "Honda",
-   Color = "White",
-   Number = "01AA101AA"
-};
-var res = carService.AddCar(null);
+//ACar car = new ACar()
+//{
+//   Id = 5,
+//   Name = "Honda",
+//   Color = "White",
+//   Number = "01AA101AA"
+//};
+carService.DeleteACar("70AD201DA");
 
