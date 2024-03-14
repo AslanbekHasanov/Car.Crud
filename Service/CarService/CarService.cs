@@ -58,10 +58,42 @@ namespace Car.Crud.Service.CarService
                 : ValidationReadCar(id);
         }
 
-       
         public bool Update(ACar car)
         {
-            throw new NotImplementedException();
+            return car is null
+                ? UpdateIsNullOrEmpty()
+                : ValidationAndUpdateCar(car);
+        }
+
+        private bool ValidationAndUpdateCar(ACar car)
+        {
+            if (car.Id is 0
+                || String.IsNullOrWhiteSpace(car.Name)
+                || String.IsNullOrWhiteSpace(car.Color)
+                || String.IsNullOrWhiteSpace(car.Number))
+            {
+                this.loggingBroker.LogErorr("Invalid car information.");
+                return false;
+            }
+            else
+            {
+                bool result = this.storageBroker.Update(car);
+                if (result is false)
+                {
+                    this.loggingBroker.LogErorr("Not Found.");
+                }
+                else
+                {
+                    this.loggingBroker.LogInformation("Updated.");
+                }
+                return result;
+            }
+        }
+
+        private bool UpdateIsNullOrEmpty()
+        {
+            this.loggingBroker.LogErorr("Car information is null.");
+            return false;
         }
 
         private ACar ValidationAddCar(ACar car)
@@ -82,6 +114,7 @@ namespace Car.Crud.Service.CarService
                 return new ACar();
             }
         }
+
         private bool ValidationDeleteCar(string number)
         {
             if (String.IsNullOrWhiteSpace(number) is true)
@@ -115,6 +148,7 @@ namespace Car.Crud.Service.CarService
             this.loggingBroker.LogErorr("Car data is null");
             return new ACar();
         }
+
         private ACar ReadCarIsNullorEmpty()
         {
             this.loggingBroker.LogErorr("Id is null or empty");
