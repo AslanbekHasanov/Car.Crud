@@ -43,7 +43,7 @@ namespace Car.Crud.Service.CarService
 
             foreach (ACar car in cars)
             {
-                this.loggingBroker.LogInformation($"{car.Id}. {car.Name} {car.Color} {car.Color}");
+                this.loggingBroker.LogInformation($"{car.Id}. {car.Name} {car.Color} {car.Number}");
             }
 
             this.loggingBroker.LogInformation($"=== End of contacts ===");
@@ -166,9 +166,10 @@ namespace Car.Crud.Service.CarService
             else 
             {
                 ACar result = this.storageBroker.ReadCar(id);
-                if (result is not null)
+                if (result.Id is not 0)
                 {
                     this.loggingBroker.LogInformation("Sucesefull");
+                    Console.WriteLine($"\n{result.Id}. {result.Name} {result.Color} {result.Number}");
                 }
                 else
                 {

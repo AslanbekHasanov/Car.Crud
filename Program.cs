@@ -12,6 +12,7 @@ CarService carService = new CarService();
 bool isContinue = true;
 do
 {
+    Console.Clear();
     Console.WriteLine("  >>>    Hello!  Welcome To The Car Market     <<<  ");
     Console.WriteLine();
     Console.WriteLine("1. View the list of cars.");
@@ -31,43 +32,51 @@ do
 
     if (isContinue1 == "2")
     {
-        Console.WriteLine("Enter the car id");
+        Console.Write("Enter the car id: ");
         int id = Convert.ToInt32(Console.ReadLine());
         carService.ReadCar(id);
     }
 
     if (isContinue1 == "3")
     {
-        Console.WriteLine("Enter the car id");
-        int id = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("Enter the name of the car");
-        string name = Console.ReadLine();
-        Console.WriteLine("Enter the color of the car");
-        string color = Console.ReadLine();
-        Console.WriteLine("Enter the number of the car");
-        string number = Console.ReadLine();
-        //carService.AddCar(id,name,color,number);
+        ACar car = new ACar(); 
+        Console.Write("Enter the car id: ");
+        car.Id = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter the name of the car: ");
+        car.Name = Console.ReadLine();
+        Console.Write("Enter the color of the car: ");
+        car.Color = Console.ReadLine();
+        Console.Write("Enter the number of the car: ");
+        car.Number = Console.ReadLine();
+
+        carService.AddCar(car);
     }
 
     if (isContinue1 == "4")
     {
-        Console.WriteLine("Enter the number of the car");
+        Console.Write("Enter the number of the car: ");
         string number = Console.ReadLine();
         carService.DeleteACar(number);
     }
 
     if (isContinue1 == "5")
     {
-        Console.WriteLine("Enter the car id");
-        int id = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("Enter the name of the car");
-        string name = Console.ReadLine();
-        Console.WriteLine("Enter the color of the car");
-        string color = Console.ReadLine();
-        Console.WriteLine("Enter the number of the car");
-        string number = Console.ReadLine();
+        ACar car = new ACar();
+        Console.Write("Enter the car id: ");
+        car.Id = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter the name of the car: ");
+        car.Name = Console.ReadLine();
+        Console.Write("Enter the color of the car: ");
+        car.Color = Console.ReadLine();
+        Console.Write("Enter the number of the car: ");
+        car.Number = Console.ReadLine();
+
+        carService.Update(car);
     }
-    if (isContinue1 == "No")
+
+    Console.Write("\nIs cantinue: (yes/ no) ");
+    string isCantinueCommand = Console.ReadLine();
+    if (isCantinueCommand.ToLower().Contains("no"))
     {
         isContinue = false;
     }

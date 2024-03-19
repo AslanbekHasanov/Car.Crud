@@ -1,6 +1,8 @@
 # Car.Crud
 We can see CRUD operations using OOP principles in this repository. In the program, the code belonging to the rules of Meyor is written.
 
+![Diagram Project](/Images/diagram-project.png)
+
 ## 1 Broker
 ### 1.0 Enter
 The necessary files and classes are created in the broker file. 
